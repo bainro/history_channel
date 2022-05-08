@@ -13,7 +13,7 @@ def main(args):
     res = "1920:-1"
     
     bash_cmd = f"ffmpeg -i {input_v} -vf scale='{res}'"
-    bash_cmd += f"' {output_dir}/frame_%05d.jpg'"
+    bash_cmd += f" '{output_dir}/frame_%05d.jpg'"
     bash_cmd = bash_cmd.split()
     process = subprocess.Popen(bash_cmd, stdout=subprocess.PIPE)
     output, error = process.communicate()
