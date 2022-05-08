@@ -13,10 +13,10 @@ def main(args):
     res = "1920:-1"
     
     bash_cmd = f"ffmpeg -i \"{input_v}\" -vf scale=\"{res}\""
-    bash_cmd += f" \"{output_dir}/frame_%05d.jpg\" -r 5"
+    bash_cmd += f" \"{output_dir}/frame_%05d.jpg\""
     print("bash command: ", bash_cmd)
     sp.call(bash_cmd, shell=True)
-    exit()
+
     # source is 60 frame per second
     imgs = os.listdir(output_dir)
     imgs = sorted(imgs)
