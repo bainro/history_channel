@@ -15,7 +15,7 @@ def main(args):
     bash_cmd = f"ffmpeg -i \"{input_v}\" -vf scale=\"{res}\""
     bash_cmd += f" \"{output_dir}/frame_%05d.jpg\""
     print("bash command: ", bash_cmd)
-    sp.call(bash_cmd, shell=True)
+    # sp.call(bash_cmd, shell=True)
 
     # source is 60 frame per second
     imgs = os.listdir(output_dir)
