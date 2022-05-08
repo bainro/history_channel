@@ -19,6 +19,15 @@ def main(args):
     bash_cmd += f" \"{output_dir}/frame_%05d.jpg\""
     print("bash command: ", bash_cmd)
     sp.call(bash_cmd, shell=True)
+    
+    # source is 60 frame per second
+    imgs = os.listdir(output_dir)
+    imgs = sorted(imgs)
+    for i in range(len(imgs)):
+        # only keep every 12th, so 5 FPS
+        if i % 12:
+            bye = os.path.join(output_dir, imgs[i])
+            os.remove(bye)
 
 if __name__ == "__main__":
    main(sys.argv[1:])
