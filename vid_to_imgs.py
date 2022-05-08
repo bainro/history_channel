@@ -12,11 +12,12 @@ def main(args):
     # maintains aspect ratio
     res = "1920:-1"
     
+    cwd = os.getcwd()
     bash_cmd = f"ffmpeg -i \"{input_v}\" -vf scale=\"{res}\""
     bash_cmd += f" \"{output_dir}/frame_%05d.jpg\""
     print("bash command: ", bash_cmd)
     bash_cmd = bash_cmd.split()
-    process = subprocess.Popen(bash_cmd, stdout=subprocess.PIPE)
+    process = subprocess.Popen(bash_cmd, stdout=subprocess.PIPE, cwd=cwd)
     output, error = process.communicate()
     print("output: ", output)
     print("error: ", error)
