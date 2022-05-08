@@ -1,9 +1,6 @@
-'''
-    Combines channels from multiple images into one 3 channel image.
-'''
-
-import subprocess
+'''Combines consecutive frames into one 3 channel image.'''
 from tqdm import tqdm
+import subprocess
 import cv2
 import sys
 import os
