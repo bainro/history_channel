@@ -3,9 +3,6 @@ import subprocess as sp
 import sys
 import os
 
-cmd='ffmpeg -i inputVideo outputFrames_%04d.sgi'
-sp.call(cmd,shell=True)
-
 def main(args):
     assert len(args) == 2, "specify output directory & input video"
     output_dir = args[0]
