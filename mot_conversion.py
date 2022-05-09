@@ -24,8 +24,11 @@ train_dir = os.path.join(mot_dir, "MOT15/train")
 train_subsets = os.listdir(train_dir)
 assert len(train_subsets) == 11, "Can't find MOT15/train/ in $CWD"
 for subset in tqdm(train_subsets, disable=DIS_TQDM):
+    bash_cmd("mkdir -p " + os.path.join(history_dir, subset, "images"))
     bash_cmd("mkdir -p " + os.path.join(history_dir, subset, "labels"))
+    bash_cmd("mkdir -p " + os.path.join(gray_dir, subset, "images"))
     bash_cmd("mkdir -p " + os.path.join(gray_dir, subset, "labels"))
+    bash_cmd("mkdir -p " + os.path.join(rgb_dir, subset, "images"))
     bash_cmd("mkdir -p " + os.path.join(rgb_dir, subset, "labels"))
     subset_abs_path = os.path.join(train_dir, subset)
     gt_file = os.path.join(subset_abs_path, "gt/gt.txt")
