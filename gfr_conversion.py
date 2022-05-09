@@ -27,6 +27,8 @@ def mse(img_1, img_2):
     err /= float(img_1.shape[0] * img_2.shape[1])
     return err    
 
+# parallel lists for finding appropriate MSE threshold
+MSEs, paths = [], []
 for subset in tqdm(train_subsets, disable=DIS_TQDM):
     bash_cmd("mkdir -p " + os.path.join(history_dir, subset))
     bash_cmd("mkdir -p " + os.path.join(gray_dir, subset))
