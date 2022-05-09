@@ -58,22 +58,25 @@ for subset in tqdm(train_subsets, disable=DIS_TQDM):
                 gray_frame[:,:,2] = gray_frame[:,:,1]
                 # save both gray & history frames
 
-                rgb_file = os.path.join(rgb_dir, subset, str(frame_id) + ".png")
+                rgb_file = os.path.join(rgb_dir, subset, "images", str(frame_id) + ".png")
                 cv2.imwrite(rgb_file, new_frame.copy())
-                history_file = os.path.join(history_dir, subset, str(frame_id) + ".png")
+                history_file = os.path.join(history_dir, subset, "images", str(frame_id) + ".png")
                 cv2.imwrite(history_file, history_frame)
-                gray_file = os.path.join(gray_dir, subset, str(frame_id) + ".png")
+                gray_file = os.path.join(gray_dir, subset, "images", str(frame_id) + ".png")
                 cv2.imwrite(gray_file, gray_frame)
 
                 gray_label_file = gray_file.replace(".png", ".txt")
                 gray_label_file = gray_label_file.replace(".jpg", ".txt")
                 gray_label_file = gray_label_file.replace(".jpeg", ".txt")
+                gray_label_file = gray_label_file.replace("images", "labels")
                 history_label_file = history_file.replace(".png", ".txt")
                 history_label_file = history_label_file.replace(".jpg", ".txt")
                 history_label_file = history_label_file.replace(".jpeg", ".txt")
+                history_label_file = history_label_file.replace("images", "labels")
                 rgb_label_file = rgb_file.replace(".png", ".txt")
                 rgb_label_file = rgb_label_file.replace(".jpg", ".txt")
                 rgb_label_file = rgb_label_file.replace(".jpeg", ".txt")
+                rgb_label_file = rgb_label_file.replace("images", "labels")
                 labels = []
 
                 label = gt_lines.pop(0)
