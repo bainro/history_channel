@@ -64,7 +64,7 @@ for subset in tqdm(train_subsets, disable=DIS_TQDM):
             # save both gray & history frames
             
             # ensure no two images are duplicates or too similar
-            if last_saved_img != None:
+            if type(last_saved_img) != type(None):
                 difference = mse(history_frame, last_saved_img)
                 print(f"mse: {difference}")
                 print(subset, frame_id)
