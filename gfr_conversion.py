@@ -84,7 +84,7 @@ for subset in tqdm(train_subsets, disable=DIS_TQDM):
                 
             # left pad with 0s to make sorting easier
             frame_id = f"{frame_id:05}"
-            rgb_file = os.path.join(img_dir, subset, "images", frame_id + ".png"
+            rgb_file = os.path.join(img_dir, subset, "images", frame_id + ".png")
             bash_cmd("cp " + img_file + " " + rgb_file)
             # yolov5 repo I'm using requires parallel images/ & labels/ dir
             history_file = os.path.join(history_dir, subset, "images", frame_id + ".png")
