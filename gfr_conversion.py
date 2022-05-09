@@ -9,7 +9,8 @@ import re
 DIS_TQDM = False
 
 cwd = os.getcwd()
-gfr_dir = os.path.join(cwd, "data/gfr")
+train_dir = os.path.join(cwd, "data/gfr")
+train_subsets = os.listdir(train_dir)
 gray_dir = os.path.join(cwd, "data/gfr_gray")
 history_dir = os.path.join(cwd, "data/gfr_history")
 
@@ -17,9 +18,6 @@ def bash_cmd(cmd_str):
     # print("[bash_cmd] " + cmd_str)
     process = subprocess.Popen(cmd_str.split(), stdout=subprocess.PIPE)
     output, error = process.communicate()
-
-train_dir = os.path.join(gfr_dir, "frames")
-train_subsets = os.listdir(train_dir)
 
 for subset in tqdm(train_subsets, disable=DIS_TQDM):
     bash_cmd("mkdir -p " + os.path.join(history_dir, subset))
