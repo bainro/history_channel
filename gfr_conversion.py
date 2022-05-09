@@ -61,8 +61,8 @@ for subset in tqdm(train_subsets, disable=DIS_TQDM):
 
             # replacing all common image formats just to be sure
             rgb_label_file = img_file.replace(".png", ".txt")
-            rgb_label_file = img_file.replace(".jpg", ".txt")
-            rgb_label_file = img_file.replace(".jepg", ".txt")
+            rgb_label_file = rgb_label_file.replace(".jpg", ".txt")
+            rgb_label_file = rgb_label_file.replace(".jpeg", ".txt")
             gray_label_file = gray_file.replace(".png", ".txt")
             gray_label_file = gray_label_file.replace(".jpg", ".txt")
             gray_label_file = gray_label_file.replace(".jpeg", ".txt")
