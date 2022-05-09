@@ -25,7 +25,6 @@ def bash_cmd(cmd_str):
 def mse(img_1, img_2):
     err = np.sum((img_1.astype("float") - img_2.astype("float")) ** 2)
     err /= float(img_1.shape[0] * img_2.shape[1])
-    print(img_1.shape);exit()
     return err    
 
 for subset in tqdm(train_subsets, disable=DIS_TQDM):
