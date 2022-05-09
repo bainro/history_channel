@@ -22,7 +22,6 @@ def bash_cmd(cmd_str):
 for subset in tqdm(train_subsets, disable=DIS_TQDM):
     bash_cmd("mkdir -p " + os.path.join(history_dir, subset))
     bash_cmd("mkdir -p " + os.path.join(gray_dir, subset))
-    frame_id = 0
     img_dir = os.path.join(train_dir, subset)
     img_files = [os.path.join(img_dir, f) for f in os.listdir(img_dir)]
     # sort by fileneame
