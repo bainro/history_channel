@@ -8,7 +8,7 @@ import re
 
 DIS_TQDM = False
 
-# download MoT dataset if not already present in $PWD
+# assumes MOT dataset is already present in $PWD
 cwd = os.getcwd()
 mot_dir = os.path.join(cwd, "data/mot")
 gray_dir = os.path.join(cwd, "data/gray")
