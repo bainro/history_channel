@@ -31,13 +31,13 @@ def mse(img_1, img_2):
 # MSEs, paths = [], []
 for subset in tqdm(train_subsets, disable=DIS_TQDM):
     img_dir = os.path.join(train_dir, subset)
+    img_files = [os.path.join(img_dir, f) for f in os.listdir(img_dir)]
     bash_cmd("mkdir -p " + os.path.join(img_dir, "images"))
     bash_cmd("mkdir -p " + os.path.join(img_dir, "labels"))
     bash_cmd("mkdir -p " + os.path.join(history_dir, subset, "images"))
     bash_cmd("mkdir -p " + os.path.join(history_dir, subset, "labels"))
     bash_cmd("mkdir -p " + os.path.join(gray_dir, subset, "images"))
     bash_cmd("mkdir -p " + os.path.join(gray_dir, subset, "labels"))
-    img_files = [os.path.join(img_dir, f) for f in os.listdir(img_dir)]
     # sort by fileneame
     img_files = sorted(img_files)
     # specifically history img
