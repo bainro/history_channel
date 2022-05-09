@@ -7,6 +7,7 @@ import os
 import re
 
 DIS_TQDM = False
+mse_threshold = 50
 
 cwd = os.getcwd()
 train_dir = os.path.join(cwd, "data/gfr")
@@ -18,6 +19,13 @@ def bash_cmd(cmd_str):
     # print("[bash_cmd] " + cmd_str)
     process = subprocess.Popen(cmd_str.split(), stdout=subprocess.PIPE)
     output, error = process.communicate()
+    
+# calulates the mean squared error between two images of same shape
+def mse(img_1, img_2):
+    err = np.sum((img_1.astype("float") - img_2.astype("float")) ** 2)
+    err /= float(img_1.shape[0] * img_2.shape[1])
+    print(img_1.shape);exit()
+    return err    
 
 for subset in tqdm(train_subsets, disable=DIS_TQDM):
     bash_cmd("mkdir -p " + os.path.join(history_dir, subset))
@@ -26,6 +34,8 @@ for subset in tqdm(train_subsets, disable=DIS_TQDM):
     img_files = [os.path.join(img_dir, f) for f in os.listdir(img_dir)]
     # sort by fileneame
     img_files = sorted(img_files)
+    # specifically history img
+    last_saved_img = None
     for img_file in tqdm(img_files, disable=DIS_TQDM):
         img_name, file_ext = os.path.splitext(img_file)
         # skip label files
@@ -52,7 +62,21 @@ for subset in tqdm(train_subsets, disable=DIS_TQDM):
             gray_frame[:,:,0] = gray_frame[:,:,1]
             gray_frame[:,:,2] = gray_frame[:,:,1]
             # save both gray & history frames
-
+            
+            # ensure no two images are duplicates or too similar
+            if last_saved_img != None:
+                difference = mse(history_frame, last_saved_img)
+                print(f"mse: {difference}")
+                print(subset, frame_id)
+                if difference > mse_threshold
+                    last_saved_img = history_frame
+                else:
+                    # skip this image because too similar to previous one
+                    continue
+            else:
+                last_saved_img = history_frame
+                
+            # left pad with 0s to make sorting easier
             frame_id = f"{frame_id:05}"
             history_file = os.path.join(history_dir, subset, frame_id + ".png")
             cv2.imwrite(history_file, history_frame)
