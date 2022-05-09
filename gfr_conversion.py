@@ -53,9 +53,10 @@ for subset in tqdm(train_subsets, disable=DIS_TQDM):
             gray_frame[:,:,2] = gray_frame[:,:,1]
             # save both gray & history frames
 
-            history_file = os.path.join(history_dir, subset, str(frame_id) + ".png")
+            frame_id = f"{frame_id:05}"
+            history_file = os.path.join(history_dir, subset, frame_id + ".png")
             cv2.imwrite(history_file, history_frame)
-            gray_file = os.path.join(gray_dir, subset, str(frame_id) + ".png")
+            gray_file = os.path.join(gray_dir, subset, frame_id + ".png")
             cv2.imwrite(gray_file, gray_frame)
 
             # replacing all common image formats just to be sure
