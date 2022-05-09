@@ -65,7 +65,6 @@ for subset in tqdm(train_subsets, disable=DIS_TQDM):
                 gray_file = os.path.join(gray_dir, subset, str(frame_id) + ".png")
                 cv2.imwrite(gray_file, gray_frame)
 
-                """
                 gray_label_file = gray_file.replace(".png", ".txt")
                 gray_label_file = gray_label_file.replace(".jpg", ".txt")
                 gray_label_file = gray_label_file.replace(".jpeg", ".txt")
@@ -89,7 +88,7 @@ for subset in tqdm(train_subsets, disable=DIS_TQDM):
                         bbox_y = str(float(label_values[3]) / h + bbox_h / 2)
                         bbox_w = str(bbox_w)
                         bbox_h = str(bbox_h)
-                        labels.append("0 " + bbox_x + " " + bbox_y + " " + bbox_w + " " + bbox_h)
+                        # labels.append("0 " + bbox_x + " " + bbox_y + " " + bbox_w + " " + bbox_h)
                     elif label_frame_id > frame_id:
                         # need to let the frame_id catch up; put back label
                         gt_lines = [label, gt_lines]
@@ -105,4 +104,3 @@ for subset in tqdm(train_subsets, disable=DIS_TQDM):
 
                 bash_cmd("cp " + gray_label_file + " " + history_label_file)
                 bash_cmd("cp " + gray_label_file + " " + rgb_label_file)
-                """
