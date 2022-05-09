@@ -110,7 +110,7 @@ for subset in tqdm(train_subsets, disable=DIS_TQDM):
             history_label_file = history_label_file.replace(".jpeg", ".txt")
             history_label_file = history_label_file.replace("images", "labels")
 
-            new_location = os.path.join(img_dir, "labels", frame_id + ".png")
+            new_location = os.path.join(img_dir, "labels", frame_id + ".txt")
             bash_cmd("cp " + rgb_label_file + " " + new_location)
             bash_cmd("cp " + rgb_label_file + " " + gray_label_file)
             bash_cmd("cp " + rgb_label_file + " " + history_label_file)
