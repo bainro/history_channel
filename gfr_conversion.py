@@ -68,7 +68,7 @@ for subset in tqdm(train_subsets, disable=DIS_TQDM):
                 difference = mse(history_frame, last_saved_img)
                 print(f"mse: {difference}")
                 print(subset, frame_id)
-                if difference > mse_threshold
+                if difference > mse_threshold:
                     last_saved_img = history_frame
                 else:
                     # skip this image because too similar to previous one
