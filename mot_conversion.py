@@ -64,6 +64,7 @@ for subset in tqdm(train_subsets, disable=DIS_TQDM):
                 gray_file = os.path.join(gray_dir, subset, str(frame_id) + ".png")
                 cv2.imwrite(gray_file, gray_frame)
 
+                """
                 gray_label_file = gray_file.replace(".png", ".txt")
                 gray_label_file = gray_label_file.replace(".jpg", ".txt")
                 gray_label_file = gray_label_file.replace(".jpeg", ".txt")
@@ -103,3 +104,4 @@ for subset in tqdm(train_subsets, disable=DIS_TQDM):
 
                 bash_cmd("cp " + gray_label_file + " " + history_label_file)
                 bash_cmd("cp " + gray_label_file + " " + rgb_label_file)
+                """
