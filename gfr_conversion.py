@@ -30,9 +30,13 @@ def mse(img_1, img_2):
 # parallel lists for finding appropriate MSE threshold
 # MSEs, paths = [], []
 for subset in tqdm(train_subsets, disable=DIS_TQDM):
-    bash_cmd("mkdir -p " + os.path.join(history_dir, subset))
-    bash_cmd("mkdir -p " + os.path.join(gray_dir, subset))
     img_dir = os.path.join(train_dir, subset)
+    bash_cmd("mkdir -p " + os.path.join(img_dir, "images"))
+    bash_cmd("mkdir -p " + os.path.join(img_dir, "labels"))
+    bash_cmd("mkdir -p " + os.path.join(history_dir, subset, "images"))
+    bash_cmd("mkdir -p " + os.path.join(history_dir, subset, "labels"))
+    bash_cmd("mkdir -p " + os.path.join(gray_dir, subset, "images"))
+    bash_cmd("mkdir -p " + os.path.join(gray_dir, subset, "labels"))
     img_files = [os.path.join(img_dir, f) for f in os.listdir(img_dir)]
     # sort by fileneame
     img_files = sorted(img_files)
@@ -80,6 +84,8 @@ for subset in tqdm(train_subsets, disable=DIS_TQDM):
                 
             # left pad with 0s to make sorting easier
             frame_id = f"{frame_id:05}"
+            rgb_file = os.path.join(img_dir, subset, "images", frame_id + ".png"
+            bash_cmd("cp " + img_file + " " + rgb_file)
             # yolov5 repo I'm using requires parallel images/ & labels/ dir
             history_file = os.path.join(history_dir, subset, "images", frame_id + ".png")
             cv2.imwrite(history_file, history_frame)
