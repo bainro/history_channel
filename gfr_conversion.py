@@ -1,5 +1,6 @@
 '''Combines consecutive frames into one 3 channel image.'''
 from tqdm import tqdm
+import numpy as np
 import subprocess
 import cv2
 import sys
