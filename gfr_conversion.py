@@ -31,7 +31,8 @@ for subset in tqdm(train_subsets, disable=DIS_TQDM):
         img_name, file_ext = os.path.splitext(img_file)
         # skip label files
         if file_ext == ".txt": continue
-        frame_id = img_name.split("/")[-1].lstrip("0")  
+        frame_id = img_name.split("/")[-1]
+        frame_id = frame_id[6:].lstrip("0")
         # offset since filenames start at 1, not 0
         frame_id = int(frame_id) - 1
         new_frame = cv2.imread(img_file)
