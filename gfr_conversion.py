@@ -68,8 +68,8 @@ for subset in tqdm(train_subsets, disable=DIS_TQDM):
             # ensure no two images are duplicates or too similar
             if type(last_saved_img) != type(None):
                 difference = mse(history_frame, last_saved_img)
-                print(f"mse: {difference}")
-                print(subset, frame_id)
+                MSEs.append(difference)
+                paths.append(f"{subset}/{frame_id:05}")
                 if difference > mse_threshold:
                     last_saved_img = history_frame
                 else:
@@ -98,3 +98,10 @@ for subset in tqdm(train_subsets, disable=DIS_TQDM):
 
             bash_cmd("cp " + rgb_label_file + " " + gray_label_file)
             bash_cmd("cp " + rgb_label_file + " " + history_label_file)
+
+# sort based on MSE values but keep parallel
+MSEs, paths = zip(*sorted(zip(MSEs, paths)))
+MSEs = MSEs[:500]
+paths = paths[:500]
+print(MSEs)
+print(paths)
