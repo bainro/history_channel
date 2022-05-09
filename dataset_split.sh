@@ -7,7 +7,7 @@ cd ~/git/darknet
 cat history_all.txt | sort -R > /tmp/all_shuffled.txt
 
 data_split=0.85
-num_lines=$(wc -l /tmp/all_shuffled.txt)
+num_lines=$(cat /tmp/all_shuffled.txt | wc -l)
 num_train=$(echo "$num_lines*$data_split" | bc)
 # cheap trick to round, because bc doesn't support it
 num_train=$(echo ${num_train%%.*})
