@@ -8,7 +8,7 @@ import os
 import re
 
 DIS_TQDM = False
-mse_threshold = 2500
+mse_threshold = 5500
 
 cwd = os.getcwd()
 train_dir = os.path.join(cwd, "data/gfr")
