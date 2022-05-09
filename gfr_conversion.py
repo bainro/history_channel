@@ -80,21 +80,26 @@ for subset in tqdm(train_subsets, disable=DIS_TQDM):
                 
             # left pad with 0s to make sorting easier
             frame_id = f"{frame_id:05}"
-            history_file = os.path.join(history_dir, subset, frame_id + ".png")
+            # yolov5 repo I'm using requires parallel images/ & labels/ dir
+            history_file = os.path.join(history_dir, subset, "images", frame_id + ".png")
             cv2.imwrite(history_file, history_frame)
-            gray_file = os.path.join(gray_dir, subset, frame_id + ".png")
+            gray_file = os.path.join(gray_dir, subset, "images", frame_id + ".png")
             cv2.imwrite(gray_file, gray_frame)
 
             # replacing all common image formats just to be sure
             rgb_label_file = img_file.replace(".png", ".txt")
             rgb_label_file = rgb_label_file.replace(".jpg", ".txt")
             rgb_label_file = rgb_label_file.replace(".jpeg", ".txt")
+            # yolov5 repo I'm using requires parallel images/ & labels/ dir
+            rgb_label_file = rgb_label_file.replace("images", "labels")
             gray_label_file = gray_file.replace(".png", ".txt")
             gray_label_file = gray_label_file.replace(".jpg", ".txt")
             gray_label_file = gray_label_file.replace(".jpeg", ".txt")
+            gray_label_file = gray_file.replace("images", "labels")
             history_label_file = history_file.replace(".png", ".txt")
             history_label_file = history_label_file.replace(".jpg", ".txt")
             history_label_file = history_label_file.replace(".jpeg", ".txt")
+            history_label_file = history_label_file.replace("images", "labels")
 
             bash_cmd("cp " + rgb_label_file + " " + gray_label_file)
             bash_cmd("cp " + rgb_label_file + " " + history_label_file)
