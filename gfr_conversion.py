@@ -8,7 +8,7 @@ import os
 import re
 
 DIS_TQDM = False
-mse_threshold = 50
+mse_threshold = 2000
 
 cwd = os.getcwd()
 train_dir = os.path.join(cwd, "data/gfr")
@@ -28,7 +28,7 @@ def mse(img_1, img_2):
     return err    
 
 # parallel lists for finding appropriate MSE threshold
-MSEs, paths = [], []
+# MSEs, paths = [], []
 for subset in tqdm(train_subsets, disable=DIS_TQDM):
     bash_cmd("mkdir -p " + os.path.join(history_dir, subset))
     bash_cmd("mkdir -p " + os.path.join(gray_dir, subset))
@@ -68,8 +68,8 @@ for subset in tqdm(train_subsets, disable=DIS_TQDM):
             # ensure no two images are duplicates or too similar
             if type(last_saved_img) != type(None):
                 difference = mse(history_frame, last_saved_img)
-                MSEs.append(difference)
-                paths.append(f"{subset}/{frame_id:05}")
+                # MSEs.append(difference)
+                # paths.append(f"{subset}/{frame_id:05}")
                 if difference > mse_threshold:
                     last_saved_img = history_frame
                 else:
@@ -99,9 +99,11 @@ for subset in tqdm(train_subsets, disable=DIS_TQDM):
             bash_cmd("cp " + rgb_label_file + " " + gray_label_file)
             bash_cmd("cp " + rgb_label_file + " " + history_label_file)
 
+"""
 # sort based on MSE values but keep parallel
 MSEs, paths = zip(*sorted(zip(MSEs, paths)))
 MSEs = MSEs[:500]
 paths = paths[:500]
 print(MSEs)
 print(paths)
+"""
