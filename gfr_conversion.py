@@ -29,10 +29,8 @@ for subset in tqdm(train_subsets, disable=DIS_TQDM):
     img_files = sorted(img_files)
     for img_file in tqdm(img_files, disable=DIS_TQDM):
         img_name, file_ext = os.path.splitext(img_file)
-        print(file_ext)
         # skip label files
         if file_ext == ".txt": continue
-        continue
         frame_id = img_name.split("/")[-1].lstrip("0")  
         # offset since filenames start at 1, not 0
         frame_id = int(frame_id) - 1
