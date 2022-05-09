@@ -36,7 +36,7 @@ for subset in tqdm(train_subsets, disable=DIS_TQDM):
         # offset since filenames start at 1, not 0
         frame_id = int(frame_id) - 1
         # the frame rate was 5 FPS
-        frame_id = frame_id / 12
+        frame_id = int(frame_id / 12)
         new_frame = cv2.imread(img_file)
 
         case = frame_id % 3
