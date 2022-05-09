@@ -22,6 +22,7 @@ def bash_cmd(cmd_str):
 
 train_dir = os.path.join(mot_dir, "MOT15/train")
 train_subsets = os.listdir(train_dir)
+assert len(train_subsets) == 11, "Can't find MOT15/train/ in $CWD"
 for subset in tqdm(train_subsets, disable=DIS_TQDM):
     bash_cmd("mkdir -p " + os.path.join(history_dir, subset))
     bash_cmd("mkdir -p " + os.path.join(gray_dir, subset))
